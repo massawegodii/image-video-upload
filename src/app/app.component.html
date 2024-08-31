@@ -1,27 +1,2 @@
-<div class="container">
-  <h2>Food Image</h2>
-  <form #imageForm="ngForm" (ngSubmit)="onSubmitImage(imageForm)">
-    <div class="form-group">
-      <label for="imageName">Name</label>
-      <input type="text" id="imageName" [(ngModel)]="imageName" name="name" required>
-    </div>
-    <div class="form-group">
-      <label for="imageCalories">Calories</label>
-      <input type="number" id="imageCalories" [(ngModel)]="imageCalories" name="calories" required>
-    </div>
-    <div class="form-group">
-      <label for="imageFile">Select Image</label>
-      <input type="file" id="imageFile" (change)="onFileSelect($event, 'image')" name="file" required>
-    </div>
-    <button type="submit">Upload Image</button>
-  </form>
 
-  <h2>Upload Video</h2>
-  <form #videoForm="ngForm" (ngSubmit)="onSubmitVideo(videoForm)">
-    <div class="form-group">
-      <label for="videoFile">Select Video</label>
-      <input type="file" id="videoFile" (change)="onFileSelect($event, 'video')" name="file" required>
-    </div>
-    <button type="submit">Upload Video</button>
-  </form>
-</div>
+<router-outlet></router-outlet>

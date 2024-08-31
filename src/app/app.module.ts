@@ -11,8 +11,22 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule,
 } from '@angular/material/snack-bar';
+import { HomeComponent } from './components/home/home.component';
+import { VideoComponent } from './components/video/video.component';
+import { ImageComponent } from './components/image/image.component';
+import { ResultsComponent } from './components/results/results.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    VideoComponent,
+    ImageComponent,
+    ResultsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,6 +34,8 @@ import {
     HttpClientModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatGridListModule,
+    NgxPaginationModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
@@ -35,6 +51,7 @@ import {
         duration: 3000,
       },
     },
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })

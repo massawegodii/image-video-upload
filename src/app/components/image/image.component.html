@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <h2 class="text-center mb-4">Upload Food Image</h2>
+      <form #imageForm="ngForm" (ngSubmit)="onSubmitImage(imageForm)"
+        class="p-4 border rounded shadow-sm">
+        <div class="form-group mb-3">
+          <label for="imageName" class="form-label">Name</label>
+          <input type="text" id="imageName" [(ngModel)]="imageName" name="name"
+            class="form-control" required>
+        </div>
+        <div class="form-group mb-3">
+          <label for="imageCalories" class="form-label">Calories</label>
+          <input type="number" id="imageCalories" [(ngModel)]="imageCalories"
+            name="calories" class="form-control" required>
+        </div>
+        <div class="form-group mb-3">
+          <label for="imageFile" class="form-label">Select Image</label>
+          <input type="file" id="imageFile"
+            (change)="onFileSelect($event, 'image')" name="file"
+            class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Upload
+          Image</button>
+      </form>
+    </div>
+  </div>
+</div>
