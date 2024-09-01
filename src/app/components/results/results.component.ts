@@ -21,6 +21,8 @@ export class ResultsComponent implements OnInit, OnDestroy {
   error: string | null = null;
   imageSubscription: Subscription | null = null;
   videoSubscription: Subscription | null = null;
+  imageSearchTerm: string = '';
+  videoSearchTerm: string = '';
 
   constructor(private uploadService: UploadService) {}
 
@@ -80,7 +82,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
     const target = event.target as HTMLSelectElement;
     if (target) {
       this.sort = target.value;
-      this.loadImages(); // Reload images with new sorting
+      this.loadImages();
     }
   }
 
@@ -88,9 +90,10 @@ export class ResultsComponent implements OnInit, OnDestroy {
     const target = event.target as HTMLSelectElement;
     if (target) {
       this.sort = target.value;
-      this.loadVideos(); // Reload videos with new sorting
+      this.loadVideos();
     }
   }
+  
 
   getImageUrl(id: number): string {
     return `http://localhost:8080/api/upload/images/${id}`;

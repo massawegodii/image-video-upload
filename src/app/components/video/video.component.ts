@@ -1,25 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 import { UploadService } from '../../_services/upload.service';
 
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
-  styleUrl: './video.component.scss',
+  styleUrls: ['./video.component.scss'],
 })
 export class VideoComponent {
-  imageFile: File | null = null;
   videoFile: File | null = null;
   videoName: string = '';
-  imageName: string = '';
-  imageCalories: number | null = null;
+  isUploading: boolean = false;
+  @ViewChild('videoFileInput') videoFileInput: any;
 
   constructor(
     private uploadService: UploadService,
-    private toastr: ToastrService,
-    private snackBar: MatSnackBar
+    private toastr: ToastrService
   ) {}
 
   onFileSelectVideo(event: any) {
@@ -28,41 +25,38 @@ export class VideoComponent {
 
   onSubmitVideo(form: NgForm) {
     if (this.videoFile && this.videoName) {
+      this.isUploading = true;
       this.uploadService.uploadVideo(this.videoFile, this.videoName).subscribe(
         (response) => {
           console.log('Success:', response);
-          this.snackBar.open('Video uploaded successfully', '', {
-            duration: 3000,
-            verticalPosition: 'top',
-            horizontalPosition: 'center',
-            panelClass: ['success-snackbar'],
-          });
+          this.isUploading = false;
+          this.toastr.success('Video uploaded successfully');
           this.clearVideoForm(form);
         },
         (error) => {
           console.error('Video upload error:', error);
-          this.snackBar.open('Video upload failed', '', {
-            duration: 3000,
-            verticalPosition: 'top',
-            horizontalPosition: 'center',
-            panelClass: ['error-snackbar'],
-          });
+          this.toastr.warning('Video upload failed. It exceeds 200MB.');
+          this.isUploading = false;
           this.clearVideoForm(form);
+        },
+        () => {
+          this.isUploading = false;
         }
       );
     } else {
-      this.snackBar.open('Please provide both a video file and a name', '', {
-        duration: 3000,
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-        panelClass: ['error-snackbar'],
-      });
+      this.toastr.warning('Please provide both a video file and a name');
+      this.isUploading = false;
     }
   }
 
   clearVideoForm(form: NgForm) {
-    form.reset();
+    form.reset(); // Clear the form
     this.videoFile = null;
     this.videoName = '';
+
+    // Reset the file input field
+    if (this.videoFileInput) {
+      this.videoFileInput.nativeElement.value = '';
+    }
   }
 }

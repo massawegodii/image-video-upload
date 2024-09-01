@@ -37,7 +37,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatGridListModule,
     NgxPaginationModule,
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 4000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
