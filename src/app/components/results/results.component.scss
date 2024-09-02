@@ -99,3 +99,26 @@ video {
 }
 
 
+/* Adjust text size for smaller devices */
+@media (max-width: 576px) {
+  .navbar-nav .nav-link {
+    font-size: 0.875rem;
+    /* Smaller font size for mobile */
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    /* Smaller font size for mobile */
+  }
+
+  .container-fluid {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  /* Smaller font size for buttons on mobile */
+}
+
